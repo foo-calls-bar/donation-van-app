@@ -30,8 +30,8 @@ export async function onRequest(context) {
         'line_items[0][price_data][unit_amount]': Math.round(amount * 100), 
         'line_items[0][quantity]': '1',
         'mode': 'payment',
-        'success_url': 'https://your-site.com/success',
-        'cancel_url': 'https://your-site.com/cancel'
+        'success_url': 'https://donate.kaiserhouse.net/success',
+        'cancel_url': 'https://donate.kaiserhouse.net'
       })
     });
 
