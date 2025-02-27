@@ -16,11 +16,9 @@ export async function onRequest(context) {
       });
     }
 
-    // Retrieve current total from KV storage (default to 0 if not set)
     let currentTotal = await env.DONATION_KV.get('total');
     currentTotal = Number(currentTotal) || 0;
 
-    // Update the total amount
     const newTotal = currentTotal + amount;
     await env.DONATION_KV.put('total', String(newTotal));
 

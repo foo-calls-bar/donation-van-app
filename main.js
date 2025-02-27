@@ -7,12 +7,8 @@ async function updateProgress() {
     const data = await response.json();
     const currentTotal = data.total || 0;
 
-    // Update the progress text
     document.getElementById('progress-text').innerText = `$${currentTotal} / $${targetAmount}`;
-
-    // Update the progress bar width
-    const progressPercent = Math.min((currentTotal / targetAmount) * 100, 100);
-    document.getElementById('progress-bar').style.width = progressPercent + '%';
+    document.getElementById('progress-bar').style.width = Math.min((currentTotal / targetAmount) * 100, 100) + '%';
   } catch (error) {
     console.error('Error fetching progress:', error);
   }
@@ -28,7 +24,6 @@ document.getElementById('donate-button').addEventListener('click', async () => {
   }
 
   try {
-    // Send request to create a Stripe Checkout session
     const response = await fetch('/create-checkout-session', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -36,9 +31,8 @@ document.getElementById('donate-button').addEventListener('click', async () => {
     });
 
     const session = await response.json();
-
     if (session.url) {
-      window.location.href = session.url; // Redirect to Stripe Checkout
+      window.location.href = session.url;
     } else {
       alert('Payment failed. Please try again.');
     }
