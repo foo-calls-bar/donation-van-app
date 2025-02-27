@@ -1,3 +1,4 @@
+/* Import Google Font */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
 
 body {
@@ -7,21 +8,29 @@ body {
   color: #333;
   margin: 0;
   padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 }
 
 .container {
-  max-width: 500px;
-  margin: 50px auto;
+  width: 90%;
+  max-width: 400px;  /* Ensures it's not too wide */
+  margin: 20px auto;
   padding: 20px;
   background: white;
   border-radius: 12px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
+/* Responsive Heading */
 h1 {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 600;
   color: #007bff;
+  margin-bottom: 10px;
 }
 
 p {
@@ -29,13 +38,15 @@ p {
   color: #555;
 }
 
+/* Donation Card */
 .donation-card {
-  padding: 20px;
+  padding: 15px;
   border-radius: 10px;
   background: #f0f8ff;
   box-shadow: inset 0 0 10px rgba(0, 0, 255, 0.1);
 }
 
+/* Progress Bar */
 .progress-container {
   width: 100%;
   height: 20px;
@@ -59,21 +70,25 @@ p {
   margin: 10px 0;
 }
 
+/* Form Styling */
 #donation-form {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  align-items: center;
 }
 
 input {
-  padding: 10px;
+  padding: 12px;
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 5px;
   text-align: center;
-  width: 100%;
+  width: 90%;
+  max-width: 250px;  /* Prevents full-width stretching */
 }
 
+/* Button Styling */
 button {
   padding: 12px;
   font-size: 16px;
@@ -84,14 +99,41 @@ button {
   border-radius: 5px;
   cursor: pointer;
   transition: 0.3s;
+  width: 90%;
+  max-width: 250px;
 }
 
 button:hover {
   background: #0056b3;
 }
 
+/* Footer */
 .footer {
   font-size: 14px;
   color: #888;
   margin-top: 20px;
+}
+
+/* Mobile-Specific Adjustments */
+@media (max-width: 480px) {
+  .container {
+    width: 95%;
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+
+  p {
+    font-size: 14px;
+  }
+
+  #progress-text {
+    font-size: 16px;
+  }
+
+  input, button {
+    width: 100%;
+  }
 }
