@@ -7,30 +7,36 @@ export async function onRequest(context) {
 
   const stripeSecretKey = env.STRIPE_SECRET_KEY;
   const stripeWebhookSecret = env.STRIPE_WEBHOOK_SECRET;
+  const sig = request.headers.get('stripe-signature');
 
   let event;
   try {
+    // Read the raw request body as a text string
     const payload = await request.text();
-    const sig = request.headers.get('stripe-signature');
 
-    // Verify the Stripe webhook signature
-    const stripeResponse = await fetch('https://api.stripe.com/v1/webhook_endpoints', {
+    // Verify the Stripe signature
+    const stripeResponse = await fetch('https://api.stripe.com/v1/events', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${stripeSecretKey}`,
+        'Stripe-Signature': sig,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ payload, sig, stripeWebhookSecret })
+      body: payload
     });
 
     if (!stripeResponse.ok) {
-      throw new Error('Webhook verification failed.');
+      console.error('⚠️ Stripe Webhook Signature Verification Failed');
+      return new Response(JSON.stringify({ error: 'Webhook signature verification failed.' }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' }
+      });
     }
 
     event = await stripeResponse.json();
   } catch (err) {
     console.error('Webhook error:', err.message);
-    return new Response(JSON.stringify({ error: 'Webhook signature verification failed.' }), {
+    return new Response(JSON.stringify({ error: 'Webhook processing error.' }), {
       status: 400,
       headers: { 'Content-Type': 'application/json' }
     });
