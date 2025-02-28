@@ -21,7 +21,6 @@ body {
   width: 90%;
 }
 
-/* Responsive Typography and Spacing */
 header h1 {
   margin-bottom: 0.5rem;
   font-size: 1.8rem;
@@ -32,6 +31,34 @@ header p {
   margin-bottom: 1.5rem;
   color: #7f8c8d;
   font-size: 1.1rem;
+}
+
+/* Donation Input Styling */
+.donation-input {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.donation-input label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #34495e;
+}
+
+.donation-input input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 2px solid #ecf0f1;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.donation-input input:focus {
+  border-color: #27ae60;
+  box-shadow: 0 0 8px rgba(39, 174, 96, 0.3);
 }
 
 .progress-section {
