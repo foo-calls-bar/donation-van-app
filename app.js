@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', async () => {
-  // Fetch the current donation total
+  // Fetch the current donation total from the API (total is in cents)
   async function fetchDonations() {
     const response = await fetch('/api/get-donations');
     const data = await response.json();
@@ -7,17 +7,22 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   async function updateProgress() {
-    const total = await fetchDonations();
-    const goal = 50000; // $50,000 goal in dollars
-    const percentage = Math.min((total / goal) * 100, 100);
+    const totalCents = await fetchDonations();
+    // Convert cents to dollars
+    const totalDollars = totalCents / 100;
+    const goalDollars = 50000; // $50,000 goal in dollars
+
+    const percentage = Math.min((totalDollars / goalDollars) * 100, 100);
     document.getElementById('progress-bar').style.width = percentage + '%';
-    document.getElementById('progress-text').innerText = `$${total} raised of $${goal} goal`;
+
+    // Format numbers nicely with commas and two decimals
+    document.getElementById('progress-text').innerText =
+      `$${totalDollars.toLocaleString(undefined, { maximumFractionDigits: 2 })} raised of $${goalDollars.toLocaleString()} goal`;
   }
 
   updateProgress();
 
   document.getElementById('donate-btn').addEventListener('click', async () => {
-    // Create a checkout session on the backend
     const response = await fetch('/api/create-checkout-session', { method: 'POST' });
     const data = await response.json();
     if (data.url) {
