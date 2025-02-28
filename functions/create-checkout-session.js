@@ -17,6 +17,7 @@ export async function onRequest(context) {
     }
 
     const stripeSecretKey = env.STRIPE_SECRET_KEY;
+    
     const stripeResponse = await fetch('https://api.stripe.com/v1/checkout/sessions', {
       method: 'POST',
       headers: {
@@ -31,17 +32,28 @@ export async function onRequest(context) {
         'line_items[0][quantity]': '1',
         'mode': 'payment',
         'success_url': 'https://donate.kaiserhouse.net/success',
-        'cancel_url': 'https://donate.kaiserhouse.net'
+        'cancel_url': 'https://donate.kaiserhouse.net',
+        'metadata[amount]': amount
       })
     });
 
     const session = await stripeResponse.json();
+
+    if (!stripeResponse.ok) {
+      console.error("Stripe API Error:", session);
+      return new Response(JSON.stringify({ error: session.error?.message || 'Error creating payment session.' }), {
+        status: stripeResponse.status,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+
     return new Response(JSON.stringify({ url: session.url }), {
       headers: { 'Content-Type': 'application/json' }
     });
 
   } catch (error) {
-    return new Response(JSON.stringify({ error: 'Payment processing error.' }), {
+    console.error("Payment Processing Error:", error);
+    return new Response(JSON.stringify({ error: 'An unexpected error occurred while processing payment.' }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' }
     });
