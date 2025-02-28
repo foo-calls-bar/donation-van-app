@@ -1,0 +1,87 @@
+/* Import Google Font */
+body {
+  font-family: 'Nunito', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #83a4d4, #b6fbff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  color: #333;
+}
+
+.container {
+  background: #fff;
+  padding: 2rem 3rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 500px;
+  width: 90%;
+}
+
+header h1 {
+  margin-bottom: 0.5rem;
+  font-size: 1.8rem;
+  color: #2c3e50;
+}
+
+header p {
+  margin-bottom: 1.5rem;
+  color: #7f8c8d;
+  font-size: 1.1rem;
+}
+
+.progress-section {
+  margin: 1.5rem 0;
+}
+
+.progress {
+  background: #ecf0f1;
+  border-radius: 8px;
+  overflow: hidden;
+  height: 30px;
+  margin-bottom: 0.5rem;
+}
+
+.progress-bar {
+  background: #27ae60;
+  height: 100%;
+  width: 0;
+  transition: width 0.8s ease-in-out;
+}
+
+#progress-text {
+  font-weight: bold;
+  color: #34495e;
+}
+
+.btn {
+  background: #27ae60;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background: #219150;
+}
+
+/* Success & Cancel Pages */
+.page-message {
+  text-align: center;
+  padding: 2rem;
+}
+
+.page-message a {
+  display: inline-block;
+  margin-top: 1rem;
+  color: #27ae60;
+  text-decoration: none;
+  font-weight: bold;
+}
