@@ -21,6 +21,7 @@ body {
   width: 90%;
 }
 
+/* Responsive Typography and Spacing */
 header h1 {
   margin-bottom: 0.5rem;
   font-size: 1.8rem;
@@ -84,4 +85,29 @@ header p {
   color: #27ae60;
   text-decoration: none;
   font-weight: bold;
+}
+
+/* Mobile Optimization */
+@media (max-width: 600px) {
+  .container {
+    padding: 1.5rem 1rem;
+    width: 95%;
+  }
+  
+  header h1 {
+    font-size: 1.5rem;
+  }
+  
+  header p, #progress-text {
+    font-size: 1rem;
+  }
+  
+  .btn {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
+  }
+  
+  .progress {
+    height: 25px;
+  }
 }
