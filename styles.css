@@ -137,4 +137,13 @@ header p {
   .progress {
     height: 25px;
   }
+  
+  /* Limit the donation input width and center it */
+ 
+  .donation-input input {
+    width: auto;
+    max-width: 300px;
+    margin: 0 auto;
+    display: block;
+  }
 }
